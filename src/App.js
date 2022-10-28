@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState, useEffect } from "react";
+import TaskCard from "./components/TaskCard";
+import axios from "axios";
 
 function App() {
+  const [tasks, setTasks] = useState([]);
+  // const axios = require("axios").default;
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/tasks/")
+      .then((response) => {
+        console.log(response);
+        setTasks(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {});
+  }, []);
+
+  const taskCards = tasks.map((obj, i) => {
+    return <TaskCard task={obj} key={i} />;
+  });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="container">
+        <div className="row">{taskCards}</div>
+      </div>
     </div>
   );
 }
