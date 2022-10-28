@@ -1,7 +1,9 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import TaskCard from "./components/TaskCard";
+import NavBar from "./components/NavBar";
 import axios from "axios";
+import AddTaskDialog from "./components/AddTaskDialog";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -25,6 +27,8 @@ function App() {
 
   return (
     <div className="App">
+      <NavBar />
+      <AddTaskDialog />
       <div className="container">
         <div className="row">{taskCards}</div>
       </div>

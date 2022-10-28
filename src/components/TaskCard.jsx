@@ -1,4 +1,5 @@
 import axios from "axios";
+import EditDialog from "./EditDialog";
 
 const TaskCard = ({ task }) => {
   const taskUrl = `http://localhost:8000/tasks/${task.id}/`;
@@ -22,9 +23,19 @@ const TaskCard = ({ task }) => {
             >
               Delete
             </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#editModal"
+            >
+              Edit
+            </button>
+            <p>{task.id}</p>
           </div>
         </div>
       </div>
+      <EditDialog task={task} key={task.id} />
     </div>
   );
 };
