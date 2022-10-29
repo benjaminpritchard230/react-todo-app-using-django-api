@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const EditDialog = ({ task }) => {
+const EditDialog = ({ task, update, setUpdate }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -10,6 +10,7 @@ const EditDialog = ({ task }) => {
       })
       .then(function (response) {
         console.log(response);
+        setUpdate(update + 1);
       })
       .catch(function (error) {
         console.log(error);

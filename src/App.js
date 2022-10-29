@@ -7,6 +7,7 @@ import AddTaskDialog from "./components/AddTaskDialog";
 
 function App() {
   const [tasks, setTasks] = useState([]);
+  const [update, setUpdate] = useState(0);
   // const axios = require("axios").default;
   useEffect(() => {
     axios
@@ -19,16 +20,18 @@ function App() {
         console.log(error);
       })
       .finally(() => {});
-  }, []);
+  }, [update]);
 
   const taskCards = tasks.map((obj, i) => {
-    return <TaskCard task={obj} key={i} />;
+    return (
+      <TaskCard task={obj} key={i} update={update} setUpdate={setUpdate} />
+    );
   });
 
   return (
     <div className="App">
       <NavBar />
-      <AddTaskDialog />
+      <AddTaskDialog update={update} setUpdate={setUpdate} />
       <div className="container">
         <div className="row">{taskCards}</div>
       </div>

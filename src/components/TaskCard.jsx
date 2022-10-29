@@ -1,11 +1,12 @@
 import axios from "axios";
 import EditDialog from "./EditDialog";
 
-const TaskCard = ({ task }) => {
+const TaskCard = ({ task, update, setUpdate }) => {
   const taskUrl = `http://localhost:8000/tasks/${task.id}/`;
   const handleDeleteClick = () => {
     axios.delete(taskUrl).then(() => {
       console.log("task deleted");
+      setUpdate((update = update + 1));
     });
   };
   return (
@@ -35,7 +36,12 @@ const TaskCard = ({ task }) => {
           </div>
         </div>
       </div>
-      <EditDialog task={task} key={task.id} />
+      <EditDialog
+        task={task}
+        key={task.id}
+        update={update}
+        setUpdate={setUpdate}
+      />
     </div>
   );
 };

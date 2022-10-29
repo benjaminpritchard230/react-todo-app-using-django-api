@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-const AddTaskDialog = () => {
+const AddTaskDialog = ({ update, setUpdate }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -11,6 +11,7 @@ const AddTaskDialog = () => {
       })
       .then(function (response) {
         console.log(response);
+        setUpdate(update + 1);
       })
       .catch(function (error) {
         console.log(error);
